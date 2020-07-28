@@ -4,18 +4,23 @@ import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
-import { createStore,combineReducers, applyMiddleware } from 'redux'
-import { createEpicMiddleware } from 'redux-observable';
-import Root from './Root';
-const epicMiddleware = createEpicMiddleware(aboutPage.epic);
-const store = createStore(
-              combineReducers({about: aboutPage.reducer, login: loginPage.reducer}),
-              applyMiddleware(epicMiddleware)
-            );
+import { IStoreState, rootReducer } from './reducers';
+import { Store, createStore, applyMiddleware } from 'redux';
+import { logger } from 'redux-logger';
+import { Provider } from 'react-redux';
+
+import AppContainer from './containers/AppContainer';
+
+const store: Store<IStoreState> = createStore(
+  rootReducer, 
+  applyMiddleware( logger )
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root store={store} />
+   <Provider store={store}>
+    <AppContainer />
+  </Provider>,
   </React.StrictMode>,
   document.getElementById('root')
 );
