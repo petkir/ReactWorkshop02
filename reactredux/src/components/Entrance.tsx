@@ -26,7 +26,7 @@ class Entrance extends React.Component<IProps, {}> {
     return(
         <div>
             enter name:<br/>
-            <input ref={ (t) => inputName = t } type="text" placeholder="justin koo" onKeyUp={ this.onKeyUpHandler } />
+            <input ref={ (t) => inputName = t } type="text" placeholder="your name" onKeyUp={ this.onKeyUpHandler } />
             <br/>
             <button onClick={ onClickCreateAccountButton }>create account</button>
         </div> 
